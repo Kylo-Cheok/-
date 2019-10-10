@@ -1,0 +1,27 @@
+import turtle
+
+def draw(num ,length):
+    if num == 0:
+        turtle.forward(length)
+        return
+    else:
+        for angle in [60, -120, 60, 0]:
+           draw(num-1, length/3)
+           turtle.left(angle)
+
+turtle.hideturtle()#隐藏箭头显示
+turtle.up()#抬笔，不留痕迹
+turtle.setx(-turtle.window_width()/2)# 将当前x轴向后移动指定距离
+turtle.sety(turtle.window_width()/5)
+turtle.down()#落笔
+turtle.speed(0)
+turtle.color('blue')
+turtle.pensize(1)
+draw(4,400)
+turtle.right(120)
+draw(4,400)
+turtle.right(120)
+draw(4,400)
+
+
+turtle.exitonclick()
