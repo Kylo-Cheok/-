@@ -1,0 +1,25 @@
+import pygame, math
+
+pygame.init()#初始化
+window = pygame.display.set_mode((600, 600))#设置窗口大小
+pygame.display.set_caption("分形树")#设置窗口标题
+screen = pygame.display.get_surface()#获取当前显示的 Surface 对象
+
+def drawTree(x1, y1, angle, depth):
+    if depth:
+        # radians()方法把角度转化为弧度角x
+        x2 = x1 + int(math.cos(math.radians(angle)) * depth * 10.0)
+        y2 = y1 + int(math.sin(math.radians(angle)) * depth * 10.0)
+        pygame.draw.line(screen, (255,255,255), (x1, y1), (x2, y2), 1)
+        #line(Surface, color, start_pos, end_pos, width=1)
+        drawTree(x2, y2, angle - 20, depth - 1)
+        drawTree(x2, y2, angle + 20, depth - 1)
+
+def input(event):
+    if event.type == pygame.QUIT:
+        exit(0)
+
+drawTree(300, 600, -90, 9)
+pygame.display.flip()#由于双缓冲的原因，需要将整个display的surface对象更新到屏幕上去
+while True:
+    input(pygame.event.wait())
